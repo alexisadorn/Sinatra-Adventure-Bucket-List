@@ -1,13 +1,16 @@
 <h1>Add a New Experience to Your Bucket List</h1>
 <form method="POST" action="/experiences">
   <label><strong>Name/Description:</strong></label>
-  <input type="text" id="description" name="experience[description]">
+  <input type="text" name="experience[description]">
   <label><strong>Country:</strong></label>
-  <input type="text" id="country" name="experience[country]">
+  <input type="text" name="experience[country]">
   <label><strong>Categories (Please select all that apply)</strong><label>
     <% @categories.each do |c| %>
-      <input type="checkbox" name="experience[categories][]" value="<%=c.id%>" id="<%=c.name%>"><%=c.name%></input>
+      <input type="checkbox" name="category[category_ids][]" value="<%=c.id%>"><%=c.name%></input>
     <% end %>
   <p>Or create a new one</p>
+  <p><label><strong>Category Name:</strong></label>
+  <input type="text" name="category[name]">
+  <br><br>
   <input type="submit" value="Add Your New Experience">
 </form>
