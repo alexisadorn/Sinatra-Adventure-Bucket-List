@@ -1,8 +1,19 @@
 class ExperiencesController < ApplicationController
-  #Users can only access this page if they are logged in. If not, redirect to '/login'
+  before '/experiences/*' do
+    if !is_logged_in?
+      flash[:login] = "You need to be logged in to performance that action"
+      redirect to '/login'
+    end
+  end
+  
   get '/experiences' do
-    @user = current_user
-    erb :"experiences/experiences"
+    if is_logged_in?
+      @user = current_user
+      erb :"experiences/experiences"
+    else
+      flash[:login] = "You need to be logged in to performance that action"
+      redirect to '/login'
+    end
   end
 
   get '/experiences/new' do
