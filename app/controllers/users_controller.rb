@@ -62,8 +62,4 @@ class UsersController < ApplicationController
       redirect to '/'
     end
   end
-
-  def is_logged_in?
-    !!session[:user_id]
-  end
 end
