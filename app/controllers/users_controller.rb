@@ -15,7 +15,8 @@ class UsersController < ApplicationController
 
     user_info.each do |attribute, value| #Can we consolidate this into a helper method at the bottom of this file?
       if value.empty?
-        redirect to '/signup' #Flash Message
+        flash[:empty] = "Please complete all fields"
+        redirect to '/signup'
       end
       #Also add a validation check in case an email is already in the system
     end
