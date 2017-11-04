@@ -1,0 +1,19 @@
+<h1><%= @experience.description %></h1>
+<% if @experience.user_id == @user.id %>
+  <h3>From Your Travel Bucket List</h3>
+<% else %>
+  <h3>From <%= @experience.user.name %>'s Travel Bucket List</h3>
+  <input type="button" value="Add this to my List">
+<% end %>
+
+<p>Categories</p>
+<% @experience.categories.each do |c| %>
+  <ul>
+    <li><%= c.name %></li>
+  </ul>
+<% end %>
+<% if @experience.user_id == @user.id %>
+  <input type="button" value="Edit Experience">
+  <input type="button" value="Delete Experience">
+<% end %>
+<p><a href="/experiences">Back to experiences list</a></p>

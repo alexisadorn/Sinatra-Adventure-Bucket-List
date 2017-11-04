@@ -4,4 +4,10 @@ class ExperiencesController < ApplicationController
     @user = current_user
     erb :"experiences/experiences"
   end
+
+  get '/experiences/:id' do
+    @user = current_user
+    @experience = Experience.find(params["id"])
+    erb :"experiences/show"
+  end
 end
