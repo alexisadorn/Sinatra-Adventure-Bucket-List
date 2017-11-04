@@ -1,19 +1,19 @@
 <h1><%= @user.name %>'s Travel Bucket List</h1>
   <% @user.experiences.each do |e| %>
     <ul>
-      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a> - <%= e.country %></li>
+      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a></li>
     </ul>
   <% end %>
 
 <input type="button" value="Add a new experience">
-<input type="button" value="View by Country">
-<input type="button" value="View by Category">
+<a href="/countries"><input type="button" value="View by Country"></a>
+<a href="/categories"><input type="button" value="View by Category"></a>
 <hr>
 <h1>Get Inspiration from Others</h1>
 <% Experience.all.each do |e| %>
   <% unless e.user_id == @user.id %>
     <ul>
-      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a> - <%= e.country %></li>
+      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a></li>
     </ul>
   <% end %>
 <% end %>

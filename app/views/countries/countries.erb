@@ -1,0 +1,6 @@
+<h1>By Country</h1>
+<% Country.all.each do |country| %>
+  <ul>
+    <li><a href="/countries/<%= country.id %>"><%= country.name %></a></li>
+  </ul>
+<% end %>

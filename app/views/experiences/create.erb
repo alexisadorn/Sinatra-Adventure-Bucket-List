@@ -2,8 +2,6 @@
 <form method="POST" action="/experiences">
   <label><strong>Name/Description:</strong></label>
   <input type="text" name="experience[description]">
-  <label><strong>Country:</strong></label>
-  <input type="text" name="experience[country]">
   <label><strong>Categories (Please select all that apply)</strong><label>
     <% @categories.each do |c| %>
       <input type="checkbox" name="category[category_ids][]" value="<%=c.id%>"><%=c.name%></input>

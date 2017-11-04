@@ -5,7 +5,7 @@ class ExperiencesController < ApplicationController
       redirect to '/login'
     end
   end
-  
+
   get '/experiences' do
     if is_logged_in?
       @user = current_user
@@ -110,6 +110,5 @@ class ExperiencesController < ApplicationController
     @experience = Experience.find(params["id"])
     erb :"experiences/show"
   end
-
 
 end

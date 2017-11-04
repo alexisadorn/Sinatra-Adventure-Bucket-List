@@ -1,0 +1,6 @@
+<h1><%= @category.name %></h1>
+<% @category.experiences.each do |experience| %>
+  <ul>
+    <li><a href="/experiences/<%= experience.id %>"><%= experience.description %></a></li>
+  </ul>
+<% end %>

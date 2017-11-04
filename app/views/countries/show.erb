@@ -1,0 +1,7 @@
+<h1><%= @country.name %></h1>
+<p><%= @country.region %></p>
+<% @country.experiences.each do |exp| %>
+  <ul>
+    <li><a href="/experiences/<%= exp.id %>"><%= exp.description %></a></li>
+  </ul>
+<% end %>
