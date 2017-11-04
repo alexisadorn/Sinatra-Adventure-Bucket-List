@@ -13,12 +13,16 @@ class UsersController < ApplicationController
                   :email => params["email"],
                   :password => params["password"] }
 
-    user_info.each do |attribute, value| #Can we consolidate this into a helper method at the bottom of this file?
+    user_info.each do |attribute, value|
       if value.empty?
-        flash[:empty] = "Please complete all fields"
+        flash[:empty] = "Please complete all fields!"
         redirect to '/signup'
       end
-      #Also add a validation check in case an email is already in the system
+    end
+
+    if User.find_by(:email => user_info[:email])
+      flash[:account_taken] = "The email you provided is already in our system. Please log-in to continue."
+      redirect to '/login'
     end
 
     new_user = User.create(user_info)
@@ -40,9 +44,13 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect to '/experiences'
     else
-      redirect to '/login'
-        #Flash message about incorrect password or no email address
-        #Something like !user : flash-message for signup ? flash-message for wrong pw
+      if user
+        flash[:password] = "Your password is incorrect"
+        redirect to '/login'
+      else
+        flash[:no_account] = "There is no account associated with that email address. Please sign up for one"
+        redirect to '/signup'
+      end
     end
   end
 
