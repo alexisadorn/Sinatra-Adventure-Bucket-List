@@ -5,6 +5,15 @@ class ExperiencesController < ApplicationController
     erb :"experiences/experiences"
   end
 
+  get '/experiences/new' do
+    @categories = Category.all
+    erb :"experiences/create"
+  end
+
+  post '/experiences' do
+    binding.pry
+  end
+
   get '/experiences/:id' do
     @user = current_user
     @experience = Experience.find(params["id"])
