@@ -1,0 +1,17 @@
+<h1>Make Changes to <%= @experience.description %></h1>
+<form method="POST" action="/experiences/<%= @experience.id %>">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <label><strong>Description:</strong></label>
+  <input type="text" name="experience[description]" value="<%= @experience.description %>">
+  <label><strong>Country:</strong></label>
+  <input type="text" name="experience[country]" value="<%= @experience.country %>">
+  <label><strong>Categories (Please select all that apply)</strong><label>
+    <% Category.all.each do |c| %>
+      <input type="checkbox" name="category[category_ids][]" value="<%=c.id%>" <%='checked' if @experience.categories.include?(c) %>><%=c.name%></input>
+    <% end %>
+  <p>Or create a new one</p>
+  <p><label><strong>Category Name:</strong></label>
+  <input type="text" name="category[name]">
+  <br><br>
+  <input type="submit" value="Save Your Changes">
+</form>
