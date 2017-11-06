@@ -18,7 +18,6 @@ class ExperiencesController < ApplicationController
 
   get '/experiences/new' do
     @categories = Category.all
-    @countries = Country.all
     erb :"experiences/create"
   end
 
@@ -35,7 +34,12 @@ class ExperiencesController < ApplicationController
 
     exp = Experience.new(:description => description)
     exp.user_id = session[:user_id]
-    exp.country = Country.find(country)
+    if Country.find_by(:name => country)
+      country = Country.find_by(:name => country)
+    else
+      country = Country.create(:name => country)
+    end
+    exp.country = country
     unless category_name.empty?
       if Category.find_by(:name => category_name) #check for duplicates
         category = Category.find_by(:name => category_name)
@@ -74,7 +78,12 @@ class ExperiencesController < ApplicationController
 
     exp = Experience.new(:description => description)
     exp.user_id = session[:user_id]
-    exp.country = Country.find(country)
+    if Country.find_by(:name => country)
+      country = Country.find_by(:name => country)
+    else
+      country = Country.create(:name => country)
+    end
+    exp.country = country
     unless category_name.empty?
       if Category.find_by(:name => category_name) #check for duplicates
         category = Category.find_by(:name => category_name)
@@ -119,7 +128,12 @@ class ExperiencesController < ApplicationController
     end
 
     @experience.update(:description => description)
-    @experience.country = Country.find(country)
+    if Country.find_by(:name => country)
+      country = Country.find_by(:name => country)
+    else
+      country = Country.create(:name => country)
+    end
+    @experience.country = country
     @experience.categories.clear
     unless category_name.empty?
       if Category.find_by(:name => category_name) #check for duplicates

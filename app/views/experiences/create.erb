@@ -2,12 +2,7 @@
 <form method="POST" action="/experiences">
   <label><strong>Description:</strong></label>
   <input type="text" name="description"><br>
-  <label><strong>Country (Please select one)</strong><label>
-    <select name="country">
-    <% @countries.each do |c| %>
-        <option value="<%=c.id%>" selected><%=c.name%></option>
-    <% end %>
-    </select>
+  <label><strong>Country</strong><label><input type="text" name="country"><br>
   <br><br>
   <label><strong>Categories (Please select all that apply)</strong><label>
     <% @categories.each do |c| %>
