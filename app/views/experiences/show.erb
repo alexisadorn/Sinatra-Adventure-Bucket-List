@@ -1,5 +1,5 @@
 <h1><%= @experience.description %></h1>
-<strong>Country to Visit:</strong>
+<strong>Country to Visit:</strong> <%= @experience.country.name %>
 <% if @experience.user_id == @user.id %>
   <h3>From Your Travel Bucket List</h3>
 <% else %>

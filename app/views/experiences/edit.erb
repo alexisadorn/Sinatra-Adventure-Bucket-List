@@ -2,7 +2,14 @@
 <form method="POST" action="/experiences/<%= @experience.id %>">
   <input id="hidden" type="hidden" name="_method" value="patch">
   <label><strong>Description:</strong></label>
-  <input type="text" name="experience[description]" value="<%= @experience.description %>">
+  <input type="text" name="description" value="<%= @experience.description %>">
+  <label><strong>Country (Please select one)</strong><label>
+    <select name="country">
+    <% Country.all.each do |c| %>
+        <option value="<%=c.id%>" selected><%=c.name%></option>
+    <% end %>
+    </select>
+  <br><br>
   <label><strong>Categories (Please select all that apply)</strong><label>
     <% Category.all.each do |c| %>
       <input type="checkbox" name="category[category_ids][]" value="<%=c.id%>" <%='checked' if @experience.categories.include?(c) %>><%=c.name%></input>

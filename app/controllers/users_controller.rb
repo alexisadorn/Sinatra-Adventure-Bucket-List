@@ -1,7 +1,4 @@
 class UsersController < ApplicationController
-  # A user should not see the signup page if they are already logged in
-  # A user should not see the login page if they are already logged in
-
   get '/signup' do
     redirect to '/experiences' if is_logged_in?
 

@@ -18,23 +18,24 @@ class ExperiencesController < ApplicationController
 
   get '/experiences/new' do
     @categories = Category.all
+    @countries = Country.all
     erb :"experiences/create"
   end
 
   post '/experiences' do
-    details = params["experience"]
+    description = params["description"]
+    country = params["country"]
     category_name = params["category"]["name"]
     category_ids = params["category"]["category_ids"]
 
-    details.each do |att, val|
-      if val.empty?
-        flash[:empty] = "Please complete all fields!"
-        redirect to '/experiences/new'
-      end
+    if description.empty? || country.empty?
+      flash[:empty] = "Please complete all fields!"
+      redirect to '/experiences/new'
     end
 
-    exp = Experience.new(details)
+    exp = Experience.new(:description => description)
     exp.user_id = session[:user_id]
+    exp.country = Country.find(country)
     unless category_name.empty?
       if Category.find_by(:name => category_name) #check for duplicates
         category = Category.find_by(:name => category_name)
@@ -64,18 +65,18 @@ class ExperiencesController < ApplicationController
   patch '/experiences/:id' do
     @experience = Experience.find(params["id"])
 
-    details = params["experience"]
+    description = params["description"]
+    country = params["country"]
     category_name = params["category"]["name"]
     category_ids = params["category"]["category_ids"]
 
-    details.each do |att, val|
-      if val.empty?
-        flash[:empty] = "Please complete all fields!"
-        redirect to '/experiences/new'
-      end
+    if description.empty? || country.empty?
+      flash[:empty] = "Please complete all fields!"
+      redirect to '/experiences/new'
     end
 
-    @experience.update(details)
+    @experience.update(:description => description)
+    @experience.country = Country.find(country)
     @experience.categories.clear
     unless category_name.empty?
       if Category.find_by(:name => category_name) #check for duplicates
