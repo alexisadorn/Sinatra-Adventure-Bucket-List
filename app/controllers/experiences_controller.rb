@@ -96,8 +96,12 @@ class ExperiencesController < ApplicationController
   end
 
   get '/experiences/:id/edit' do
-    # Only the user who the experience belongs to can see this route
+    @user = current_user
     @experience = Experience.find(params["id"])
+    if @user.id != @experience.user_id
+      flash[:edit_user] = "You can only edit your own experiences"
+      redirect to "/experiences/#{@experience.id}"
+    end
     erb :"experiences/edit"
   end
 
@@ -138,11 +142,16 @@ class ExperiencesController < ApplicationController
   end
 
   delete '/experiences/:id/delete' do
-    #Only the user who owns it can delete it
+    @user = current_user
     @experience = Experience.find(params[:id])
-    @experience.destroy
-    flash[:deleted] = "Your experience has been deleted"
-    redirect to '/experiences'
+    if @user.id != @experience.user_id
+      flash[:edit_user]
+      redirect to '/experiences/#{@experience.id}'
+    else
+      @experience.destroy
+      flash[:deleted] = "Your experience has been deleted"
+      redirect to '/experiences'
+    end
   end
 
   get '/experiences/:id' do

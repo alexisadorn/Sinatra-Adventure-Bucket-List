@@ -4,7 +4,9 @@
     <title>Travel Bucket List</title>
   </head>
   <body>
-    <a href='/logout'>Logout</a>
+    <% if is_logged_in? %>
+      <a href='/logout'>Logout</a>
+    <% end %>
     <% flash.keys.each do |type| %>
       <div data-alert class="flash <%= type %> alert-box radius">
         <%= flash[type] %>

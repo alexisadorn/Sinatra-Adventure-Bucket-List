@@ -6,6 +6,9 @@ class ApplicationController < Sinatra::Base
   set :views, Proc.new { File.join(root, "../views/") }
 
   get '/' do
+    if is_logged_in?
+      redirect to '/experiences'
+    end
     erb :index
   end
 
