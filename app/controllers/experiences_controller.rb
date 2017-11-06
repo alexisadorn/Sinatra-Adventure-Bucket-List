@@ -56,6 +56,45 @@ class ExperiencesController < ApplicationController
     redirect to "experiences/#{exp.id}"
   end
 
+  get '/experiences/:id/new_from_user' do
+    @experience = Experience.find(params["id"])
+    erb :"experiences/create_from_user"
+  end
+
+  post '/experiences/new_from_user' do
+    description = params["description"]
+    country = params["country"]
+    category_name = params["category"]["name"]
+    category_ids = params["category"]["category_ids"]
+
+    if description.empty? || country.empty?
+      flash[:empty] = "Please complete all fields!"
+      redirect to '/experiences/new'
+    end
+
+    exp = Experience.new(:description => description)
+    exp.user_id = session[:user_id]
+    exp.country = Country.find(country)
+    unless category_name.empty?
+      if Category.find_by(:name => category_name) #check for duplicates
+        category = Category.find_by(:name => category_name)
+      else
+        category = Category.create(:name => category_name)
+      end
+      exp.categories << category
+    end
+    if category_ids
+      category_ids.each do |id|
+        exp.categories << Category.find(id)
+      end
+    end
+
+    exp.save
+
+    flash[:success] = "Successfully created new experience!"
+    redirect to "experiences/#{exp.id}"
+  end
+
   get '/experiences/:id/edit' do
     # Only the user who the experience belongs to can see this route
     @experience = Experience.find(params["id"])

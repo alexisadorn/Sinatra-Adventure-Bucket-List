@@ -14,7 +14,7 @@
 <% Experience.all.each do |e| %>
   <% unless e.user_id == @user.id %>
     <ul>
-      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a></li>
+      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a> - <%= e.country.name %></li>
     </ul>
   <% end %>
 <% end %>

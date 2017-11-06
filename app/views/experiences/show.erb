@@ -4,7 +4,7 @@
   <h3>From Your Travel Bucket List</h3>
 <% else %>
   <h3>From <%= @experience.user.name %>'s Travel Bucket List</h3>
-  <input type="button" value="Add this to my List">
+  <a href="/experiences/<%= @experience.id %>/new_from_user"><input type="button" value="Add this to my List"></a>
 <% end %>
 
 <p>Categories</p>
