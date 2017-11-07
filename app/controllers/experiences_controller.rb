@@ -22,42 +22,10 @@ class ExperiencesController < ApplicationController
   end
 
   post '/experiences' do
-    description = params["description"]
-    country = params["country"]
-    category_name = params["category"]["name"]
-    category_ids = params["category"]["category_ids"]
-
-    if description.empty? || country.empty?
-      flash[:empty] = "Please complete all fields!"
-      redirect to '/experiences/new'
-    end
-
-    exp = Experience.new(:description => description)
-    exp.user_id = session[:user_id]
-    if Country.find_by(:name => country)
-      country = Country.find_by(:name => country)
-    else
-      country = Country.create(:name => country)
-    end
-    exp.country = country
-    unless category_name.empty?
-      if Category.find_by(:name => category_name) #check for duplicates
-        category = Category.find_by(:name => category_name)
-      else
-        category = Category.create(:name => category_name)
-      end
-      exp.categories << category
-    end
-    if category_ids
-      category_ids.each do |id|
-        exp.categories << Category.find(id)
-      end
-    end
-
-    exp.save
+    Experience.create_new_experience(params, 'new', session[:user_id])
 
     flash[:success] = "Successfully created new experience!"
-    redirect to "experiences/#{exp.id}"
+    redirect to "experiences/#{@experience.id}"
   end
 
   get '/experiences/:id/new_from_user' do
@@ -66,42 +34,10 @@ class ExperiencesController < ApplicationController
   end
 
   post '/experiences/new_from_user' do
-    description = params["description"]
-    country = params["country"]
-    category_name = params["category"]["name"]
-    category_ids = params["category"]["category_ids"]
-
-    if description.empty? || country.empty?
-      flash[:empty] = "Please complete all fields!"
-      redirect to '/experiences/new'
-    end
-
-    exp = Experience.new(:description => description)
-    exp.user_id = session[:user_id]
-    if Country.find_by(:name => country)
-      country = Country.find_by(:name => country)
-    else
-      country = Country.create(:name => country)
-    end
-    exp.country = country
-    unless category_name.empty?
-      if Category.find_by(:name => category_name) #check for duplicates
-        category = Category.find_by(:name => category_name)
-      else
-        category = Category.create(:name => category_name)
-      end
-      exp.categories << category
-    end
-    if category_ids
-      category_ids.each do |id|
-        exp.categories << Category.find(id)
-      end
-    end
-
-    exp.save
+    Experience.create_new_experience(params, 'user', session[:user_id])
 
     flash[:success] = "Successfully created new experience!"
-    redirect to "experiences/#{exp.id}"
+    redirect to "experiences/#{@experience.id}"
   end
 
   get '/experiences/:id/edit' do
@@ -115,44 +51,12 @@ class ExperiencesController < ApplicationController
   end
 
   patch '/experiences/:id' do
-    @experience = Experience.find(params["id"])
+    exp = Experience.find(params["id"])
 
-    description = params["description"]
-    country = params["country"]
-    category_name = params["category"]["name"]
-    category_ids = params["category"]["category_ids"]
-
-    if description.empty? || country.empty?
-      flash[:empty] = "Please complete all fields!"
-      redirect to '/experiences/new'
-    end
-
-    @experience.update(:description => description)
-    if Country.find_by(:name => country)
-      country = Country.find_by(:name => country)
-    else
-      country = Country.create(:name => country)
-    end
-    @experience.country = country
-    @experience.categories.clear
-    unless category_name.empty?
-      if Category.find_by(:name => category_name) #check for duplicates
-        category = Category.find_by(:name => category_name)
-      else
-        category = Category.create(:name => category_name)
-      end
-      @experience.categories << category
-    end
-    if category_ids
-      category_ids.each do |id|
-        @experience.categories << Category.find(id)
-      end
-    end
-
-    @experience.save
+    Experience.update_experience(params, 'edit', exp)
 
     flash[:success] = "Successfully updated your experience!"
-    redirect to "experiences/#{@experience.id}"
+    redirect to "experiences/#{exp.id}"
   end
 
   delete '/experiences/:id/delete' do

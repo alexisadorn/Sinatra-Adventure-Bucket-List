@@ -1,5 +1,6 @@
 <h1>Add a New Experience to Your Bucket List</h1>
 <form method="POST" action="/experiences/new_from_user">
+  <input name="id" value="<%= @experience.id %>" type="hidden">
   <label><strong>Description:</strong></label>
   <input type="text" name="description" value="<%= @experience.description %>">
   <label><strong>Country</strong><label>
