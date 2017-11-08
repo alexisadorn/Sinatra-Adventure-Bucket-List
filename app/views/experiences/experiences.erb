@@ -9,7 +9,6 @@
 <a href="/experiences/new"><input type="button" value="Add a new experience"></a>
 <a href="/countries"><input type="button" value="View by Country"></a>
 <a href="/categories"><input type="button" value="View by Category"></a>
-<hr>
 <h1>Get Inspiration from Others</h1>
 <% Experience.all.each do |e| %>
   <% unless e.user_id == @user.id %>
