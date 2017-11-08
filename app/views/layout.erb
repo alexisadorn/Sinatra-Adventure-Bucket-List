@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Travel Bucket List</title>
+    <title>Adventure Bucket List</title>
+    <link href="/css/bootstrap.css"  rel="stylesheet" />
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet" />
   </head>
   <body>
     <% if is_logged_in? %>
@@ -14,5 +16,7 @@
       </div>
     <% end %>
     <%= yield %>
+    <!-- Bootstrap jQuery Plugins, compiled and minified -->
+    <script src="/js/bootstrap.min.js"></script>
   </body>
 </html>
