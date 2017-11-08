@@ -47,8 +47,8 @@ class UsersController < ApplicationController
         flash[:password] = "Your password is incorrect"
         redirect to '/login'
       else
-        flash[:no_account] = "There is no account associated with that email address. Please sign up for one"
-        redirect to '/signup'
+        flash[:no_account] = "There is no account associated with that email address. Please enter a different email or sign up for an account."
+        redirect to '/login'
       end
     end
   end

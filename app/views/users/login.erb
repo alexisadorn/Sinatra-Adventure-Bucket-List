@@ -1,14 +1,15 @@
 <body class="home-page-bkgd">
   <div class="home-page-container">
     <div class="text-center">
-      <h1>Login to your Account</h1>
+      <h1>Log In to your Account</h1>
+        <p>Don't have an account yet? <a href="/signup">Sign Up for one Here</a></p>
         <form method="POST" action="/login">
-        <label><strong>Email:</strong></label>
-        <input type="text" id="email" name="email"><br>
-        <label><strong>Password:</strong></label>
-        <input type="text" id="password" name="password"><br>
+        <label><strong>Email: *</strong></label>
+        <input type="text" name="email" required><br>
+        <label><strong>Password: *</strong></label>
+        <input type="password" name="password"><br>
         <br>
-        <input type="submit" value="Login">
+        <input class="btn btn-info btn-lg" type="submit" value="Log In">
         </form>
     </div>
   </div>
