@@ -22,7 +22,16 @@ class ExperiencesController < ApplicationController
   end
 
   post '/experiences' do
-    Experience.create_new_experience(params, 'new', session[:user_id])
+    details = {
+      :description => @params["description"],
+      :country => @params["country"]
+    }
+    category_name = @params["category"]["name"]
+    category_ids = @params["category"]["category_ids"]
+
+    is_empty?(details, 'experiences/new')
+
+    @experience = Experience.create_new_experience(details, category_name, category_ids, params[:session_id])
 
     flash[:success] = "Successfully created new experience!"
     redirect to "experiences/#{@experience.id}"
@@ -34,7 +43,16 @@ class ExperiencesController < ApplicationController
   end
 
   post '/experiences/new_from_user' do
-    Experience.create_new_experience(params, 'user', session[:user_id])
+    details = {
+      :description => @params["description"],
+      :country => @params["country"]
+    }
+    category_name = @params["category"]["name"]
+    category_ids = @params["category"]["category_ids"]
+
+    is_empty?(details, "experiences/#{params[:id]}/new_from_user")
+
+    @experience = Experience.create_new_experience(details, category_name, category_ids, params[:session_id])
 
     flash[:success] = "Successfully created new experience!"
     redirect to "experiences/#{@experience.id}"
@@ -51,9 +69,17 @@ class ExperiencesController < ApplicationController
   end
 
   patch '/experiences/:id' do
-    exp = Experience.find(params["id"])
+    experience = Experience.find(params[:id])
+    details = {
+      :description => params["description"],
+      :country => params["country"]
+    }
+    category_name = params["category"]["name"]
+    category_ids = params["category"]["category_ids"]
 
-    Experience.update_experience(params, 'edit', exp)
+    is_empty?(details, "experiences/#{params[:id]}/edit")
+
+    exp = Experience.update_experience(details, category_name, category_ids, experience)
 
     flash[:success] = "Successfully updated your experience!"
     redirect to "experiences/#{exp.id}"

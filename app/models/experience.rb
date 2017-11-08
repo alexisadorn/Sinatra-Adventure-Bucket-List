@@ -4,12 +4,11 @@ class Experience < ActiveRecord::Base
   has_many :experience_categories
   has_many :categories, through: :experience_categories
 
-  def self.create_new_experience(params, route, session_id)
-    @params = params
-    @route = route
+  def self.create_new_experience(details, category_name, category_ids, session_id)
+    @details = details
+    @category_name = category_name
+    @category_ids = category_ids
 
-    set_details
-    check_missing_value
     set_country
 
     @experience = Experience.new(
@@ -23,17 +22,16 @@ class Experience < ActiveRecord::Base
     @experience.save
   end
 
-  def self.update_experience(params, route, experience)
-    @params = params
-    @route = route
+  def self.update_experience(details, category_name, category_ids, experience)
+    @details = details
+    @category_name = category_name
+    @category_ids = category_ids
     @experience = experience
 
-    set_details
-    check_missing_value
     set_country
 
     @experience.update(
-      :description => description,
+      :description => @details[:description],
       :country => @country
     )
 
@@ -43,39 +41,18 @@ class Experience < ActiveRecord::Base
     @experience.save
   end
 
-  def self.set_details
-    @details = {
-      :description => @params["description"],
-      :country => @params["country"]
-    }
-    @category_name = @params["category"]["name"]
-    @category_ids = @params["category"]["category_ids"]
-  end
-
-  def self.check_missing_value
-    if @route == 'new'
-      redirect = 'experiences/new'
-    elsif @route == 'user'
-      redirect = "/experiences/#{params[:id]}/new_from_user}"
-    else
-      redirect = "/experiences/#{@experience.id}/edit"
-    end
-
-    is_empty?(@details, redirect)
-  end
-
   def self.set_country
     @country = Country.find_by(:name => @details[:country]).presence || Country.create(:name => @details[:country])
   end
 
   def self.set_categories
-    unless category_name.empty?
+    unless @category_name.empty?
       # Checks for duplicates
-      category = Category.find_by(:name => category_name).presence || Category.create(:name => category_name)
+      category = Category.find_by(:name => @category_name).presence || Category.create(:name => @category_name)
       @experience.categories << category
     end
-    if category_ids
-      category_ids.each do |id|
+    if @category_ids
+      @category_ids.each do |id|
         @experience.categories << Category.find(id)
       end
     end
