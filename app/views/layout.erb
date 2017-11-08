@@ -5,28 +5,7 @@
     <link href="/css/bootstrap.css"  rel="stylesheet" />
     <link href="/css/bootstrap-responsive.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <style>
-      h1, h2, h3, h4, h5, h6 {
-        font-family: 'Nunito', sans-serif;
-      }
-
-      p, div {
-        font-family: 'Nunito', sans-serif;
-      }
-
-      .home-page-bkgd {
-        background-image:url('/img/wanderlust.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-
-      .home-page-container {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-    </style>
+    <link href="/css/style.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
@@ -34,12 +13,14 @@
       <a href="/logout" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
       <% end %>
     </nav>
-    <% flash.keys.each do |type| %>
-      <div data-alert class="flash <%= type %> alert-box radius">
-        <%= flash[type] %>
-        <a href="#" class="close">&times;</a>
-      </div>
-    <% end %>
+    <div class="text-center flash-message">
+      <% flash.keys.each do |type| %>
+        <div data-alert class="flash <%= type %> alert-box radius">
+          <%= flash[type] %>
+          <a href="#" class="close">&times;</a>
+        </div>
+      <% end %>
+    </div>
     <%= yield %>
     <!-- Bootstrap jQuery Plugins, compiled and minified -->
     <script src="/js/bootstrap.min.js"></script>

@@ -1,17 +1,17 @@
 <body class="home-page-bkgd">
   <div class="home-page-container">
     <div class="text-center">
-      <h1>Welcome to Adventure Bucket List</h1>
-        <p>To start your own bucket list, please create an account:</p>
+      <h1>Welcome to Your Adventure Bucket List</h1>
+        <p>Please create an account:</p>
           <form method="POST" action='/signup'>
-            <label><strong>Name:</strong></label>
-            <input type="text" id="name" name="name"><br>
-            <label><strong>Email:</strong></label>
-            <input type="text" id="email" name="email"><br>
-            <label><strong>Create a Password:</strong></label>
-            <input type="text" id="password" name="password"><br>
+            <label><strong>Name: *</strong></label>
+            <input type="text" name="name" required><br>
+            <label><strong>Email: *</strong></label>
+            <input type="text" name="email" required><br>
+            <label><strong>Create a Password: *</strong></label>
+            <input type="password" name="password" required><br>
             <br>
-            <input type="submit" value="Create my Account">
+            <input class="btn btn-info btn-lg" type="submit" value="Create my Account">
           </form>
         </div>
       </div>
