@@ -13,16 +13,14 @@
       <a href="/logout" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-log-out"></span> Log out</a>
       <% end %>
     </nav>
-    <div class="text-center flash-message">
       <% flash.keys.each do |type| %>
-        <div data-alert class="flash <%= type %> alert-box radius">
+        <div class="text-center alert alert-warning">
           <%= flash[type] %>
-          <a href="#" class="close">&times;</a>
         </div>
       <% end %>
-    </div>
     <%= yield %>
     <!-- Bootstrap jQuery Plugins, compiled and minified -->
+    <script src="/js/bootstrap.js"></script>
     <script src="/js/bootstrap.min.js"></script>
   </body>
 </html>
