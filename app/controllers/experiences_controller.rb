@@ -36,7 +36,7 @@ class ExperiencesController < ApplicationController
 
     is_empty?(details, 'experiences/new')
 
-    @experience = Experience.create_new_experience(details, category_name, category_ids, params[:session_id])
+    @experience = Experience.create_new_experience(details, category_name, category_ids, session[:user_id])
 
     flash[:success] = "Successfully created new experience!"
     redirect to "experiences/#{@experience.id}"

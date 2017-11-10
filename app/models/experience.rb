@@ -4,20 +4,21 @@ class Experience < ActiveRecord::Base
   has_many :experience_categories
   has_many :categories, through: :experience_categories
 
-  def self.create_new_experience(details, category_name, category_ids, session_id)
+  def self.create_new_experience(details, category_name, category_ids, session_uid)
     @details = details
     @category_name = category_name
     @category_ids = category_ids
+    @user = User.find(session_uid)
 
     set_country
 
     @experience = Experience.new(
       :description => @details[:description],
       :country => @country,
-      :user_id => session_id
     )
 
     set_categories
+    @experience.user = @user
 
     @experience.save
     @experience
