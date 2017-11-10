@@ -6,6 +6,10 @@ p, div {
   font-family: 'Nunito', sans-serif;
 }
 
+body {
+  background-image:url('/img/topography.png');
+}
+
 .home-page-bkgd {
   background-image:url('/img/wanderlust.jpg');
   background-repeat: no-repeat;

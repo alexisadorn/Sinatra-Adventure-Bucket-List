@@ -1,10 +1,14 @@
-<h1><%= @user.name %>'s Travel Bucket List</h1>
-  <% @user.experiences.each do |e| %>
-  <% country = Country.find(e.country_id) %>
-    <ul>
-      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a> - <%= country.name %></li>
-    </ul>
-  <% end %>
+<div class="container">
+  <h1><%= @user.name %>'s Travel Bucket List</h1>
+<% @user.experiences.each do |e| %>
+<% country = Country.find(e.country_id) %>
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title"><a href='/experiences/<%= e.id %>'><%= e.description %></a></h4>
+      <p class="card-text"><%= country.name %></p>
+    </div>
+  </div>
+<% end %>
 
 <a href="/experiences/new"><input type="button" value="Add a new experience"></a>
 <a href="/countries"><input type="button" value="View by Country"></a>
@@ -19,3 +23,4 @@
 <% end %>
 <input type="button" value="View all by Country">
 <input type="button" value="View all by Category">
+</div>
