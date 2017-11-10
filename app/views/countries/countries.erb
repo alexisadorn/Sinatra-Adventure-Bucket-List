@@ -1,6 +1,6 @@
 <h1>View all Experiences by Country</h1>
 <div class="list-group">
-  <% Country.all.each do |country| %>
+  <% @countries.each do |country| %>
     <% if !country.experiences.empty? %>
     <a href="/countries/<%= country.id %>" class="list-group-item list-group-item-action"><%= country.name %>
     <span class="badge badge-primary badge-pill" style="margin: 5px"><%= country.experiences.length %></span></a>

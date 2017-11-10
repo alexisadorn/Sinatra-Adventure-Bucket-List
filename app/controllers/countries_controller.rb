@@ -11,6 +11,7 @@ class CountriesController < ApplicationController
       flash[:login] = "You need to be logged in to performance that action"
       redirect to '/login'
     end
+    @countries = Country.all.sort_by{|c| c.name}
     erb :"countries/countries"
   end
 

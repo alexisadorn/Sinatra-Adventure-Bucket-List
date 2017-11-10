@@ -11,6 +11,7 @@ class CategoriesController < ApplicationController
       flash[:login] = "You need to be logged in to performance that action"
       redirect to '/login'
     end
+    @categories = Category.all.sort_by{|c| c.name}
     erb :"categories/categories"
   end
 
