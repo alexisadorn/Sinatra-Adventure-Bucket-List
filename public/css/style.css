@@ -6,10 +6,6 @@ p, div {
   font-family: 'Nunito', sans-serif;
 }
 
-body {
-  background-image:url('/img/topography.png');
-}
-
 .home-page-bkgd {
   background-image:url('/img/wanderlust.jpg');
   background-repeat: no-repeat;
@@ -24,5 +20,6 @@ body {
 }
 
 .exp-card {
-  border: 1px solid black;
+  width: 20rem;
+  padding: 20px;
 }

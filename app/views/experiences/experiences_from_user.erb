@@ -1,0 +1,10 @@
+<h1>Get Inspiration from Others</h1>
+<% Experience.all.each do |e| %>
+  <% unless e.user_id == @user.id %>
+    <ul>
+      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a> - <%= e.country.name %></li>
+    </ul>
+  <% end %>
+<% end %>
+<input type="button" value="View all by Country">
+<input type="button" value="View all by Category">

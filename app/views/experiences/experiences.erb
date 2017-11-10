@@ -1,34 +1,25 @@
-<h1><%= @user.name %>'s Travel Bucket List</h1>
-  <% @user.experiences.each do |e| %>
-    <% country = Country.find(e.country_id) %>
-    <div class="exp-card">
-        <h4><a href='/experiences/<%= e.id %>'><%= e.description %></a></h4>
-        <p><%= country.name %></p>
-    </div>
-<% end %>
-
-<a href="/experiences/new"><input type="button" value="Add a new experience"></a>
-<a href="/countries"><input type="button" value="View by Country"></a>
-<a href="/categories"><input type="button" value="View by Category"></a>
-<h1>Get Inspiration from Others</h1>
-<% Experience.all.each do |e| %>
-  <% unless e.user_id == @user.id %>
-    <ul>
-      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a> - <%= e.country.name %></li>
-    </ul>
+<h1><%= @user.name %>'s Adventure Bucket List</h1>
+<br>
+<% if @user.experiences.empty? %>
+  <div class="text-center"><p>You don't have anything in your Adventure Bucket List!</p>
+  <p><a class="btn btn-success" style="margin: 20px" href="/experiences/new" role="button">Add a New Experience</a>
+  or
+  <a class="btn btn-warning" style="margin: 20px" href="/experiences/users" role="button">Get Inspiration from Others</a></p></div>
+<% else %>
+<div class="row">
+  <a class="btn btn-success" style="margin: 20px" href="/experiences/new" role="button">+ Add New</a>
+  <a class="btn btn-info" style="margin: 20px" href="/countries" role="button">View By Country</a>
+  <a class="btn btn-info" style="margin: 20px" href="/categories" role="button">View By Category</a>
+  <a class="btn btn-warning" style="margin: 20px" href="/experiences/users" role="button">Get Inspiration</a>
+</div>
   <% end %>
-<% end %>
-<input type="button" value="View all by Country">
-<input type="button" value="View all by Category">
 
 <div class="row">
-    <div class="col-sm">
-      One of three columns
-    </div>
-    <div class="col-sm">
-      One of three columns
-    </div>
-    <div class="col-sm">
-      One of three columns
-    </div>
-  </div>
+  <% @user.experiences.each do |e| %>
+    <% country = Country.find(e.country_id) %>
+      <div class="card" style="width: 15rem; margin: 20px">
+        <div class="card-header"><a href='/experiences/<%= e.id %>'><%= e.description %></a></div>
+        <div class="card-footer"><%= country.name %></div>
+      </div>
+    <% end %>
+</div>

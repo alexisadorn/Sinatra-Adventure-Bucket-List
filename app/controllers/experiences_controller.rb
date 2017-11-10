@@ -16,6 +16,11 @@ class ExperiencesController < ApplicationController
     end
   end
 
+  get '/experiences/users' do
+    @user = current_user
+    erb :"experiences/experiences_from_user"
+  end
+
   get '/experiences/new' do
     @categories = Category.all
     erb :"experiences/create"
