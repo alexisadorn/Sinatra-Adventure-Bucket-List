@@ -14,10 +14,6 @@ class CountriesController < ApplicationController
     erb :"countries/countries"
   end
 
-  get '/all_countries' do
-    erb :"countries/all_countries"
-  end
-
   get '/countries/:id' do
     @country = Country.find(params["id"])
     erb :"countries/show"

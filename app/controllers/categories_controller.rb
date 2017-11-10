@@ -14,10 +14,6 @@ class CategoriesController < ApplicationController
     erb :"categories/categories"
   end
 
-  get '/all_categories' do
-    erb :"categories/all_categories"
-  end
-
   get '/categories/:id' do
     @category = Category.find(params["id"])
     erb :"categories/show"

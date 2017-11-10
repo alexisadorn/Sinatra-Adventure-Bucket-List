@@ -2,7 +2,7 @@
 <% Country.all.each do |country| %>
   <ul>
     <% if !country.experiences.empty? %>
-      <li><a href="/countries/<%= country.id %>"><%= country.name %></a>(<%= country.experiences.length %>)</li>
+      <li><a href="/countries/<%= country.id %>"><%= country.name %></a> (<%= country.experiences.length %>)</li>
     <% end %>
   </ul>
 <% end %>
