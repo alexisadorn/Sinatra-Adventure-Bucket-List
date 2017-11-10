@@ -18,8 +18,10 @@
   <% @user.experiences.each do |e| %>
     <% country = Country.find(e.country_id) %>
       <div class="card" style="width: 15rem; margin: 20px">
-        <div class="card-header"><a href='/experiences/<%= e.id %>'><%= e.description %></a></div>
-        <div class="card-footer"><%= country.name %></div>
+        <div class="text-center">
+          <div class="card-header"><a href='/experiences/<%= e.id %>'><%= e.description %></a></div>
+          <div class="card-body" style="padding: 10px"><%= country.name %></div>
+        </div>
       </div>
     <% end %>
 </div>
