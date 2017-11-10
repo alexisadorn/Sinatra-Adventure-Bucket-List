@@ -1,4 +1,4 @@
-class ExperiencesController < ApplicationController
+class CountriesController < ApplicationController
   before '/countries/*' do
     if !is_logged_in?
       flash[:login] = "You need to be logged in to performance that action"

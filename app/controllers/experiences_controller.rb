@@ -43,8 +43,14 @@ class ExperiencesController < ApplicationController
   end
 
   get '/experiences/:id/new_from_user' do
+    user = current_user
     @experience = Experience.find(params["id"])
-    erb :"experiences/create_from_user"
+    if @experience.user_id == user.id
+      flash[:add_from_user] = "This experience already belongs to you!"
+      redirect to "/experiences/#{params["id"]}"
+    else
+      erb :"experiences/create_from_user"
+    end
   end
 
   post '/experiences/new_from_user' do
@@ -57,7 +63,7 @@ class ExperiencesController < ApplicationController
 
     is_empty?(details, "experiences/#{params[:id]}/new_from_user")
 
-    @experience = Experience.create_new_experience(details, category_name, category_ids, params[:session_id])
+    @experience = Experience.create_new_experience(details, category_name, category_ids, session[:user_id])
 
     flash[:success] = "Successfully created new experience!"
     redirect to "experiences/#{@experience.id}"
