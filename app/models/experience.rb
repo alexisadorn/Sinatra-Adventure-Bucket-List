@@ -20,6 +20,7 @@ class Experience < ActiveRecord::Base
     set_categories
 
     @experience.save
+    @experience
   end
 
   def self.update_experience(details, category_name, category_ids, experience)
@@ -39,6 +40,7 @@ class Experience < ActiveRecord::Base
     set_categories
 
     @experience.save
+    @experience
   end
 
   def self.set_country

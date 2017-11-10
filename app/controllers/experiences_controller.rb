@@ -75,6 +75,7 @@ class ExperiencesController < ApplicationController
 
   patch '/experiences/:id' do
     experience = Experience.find(params[:id])
+
     details = {
       :description => params["description"],
       :country => params["country"]
