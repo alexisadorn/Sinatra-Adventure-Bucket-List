@@ -22,3 +22,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+.exp-card {
+  border: 1px solid black;
+}
