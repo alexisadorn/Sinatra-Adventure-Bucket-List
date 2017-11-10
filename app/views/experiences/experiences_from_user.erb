@@ -1,10 +1,21 @@
 <h1>Get Inspiration from Others</h1>
-<% Experience.all.each do |e| %>
-  <% unless e.user_id == @user.id %>
-    <ul>
-      <li><a href='/experiences/<%= e.id %>'><%= e.description %></a> - <%= e.country.name %></li>
-    </ul>
-  <% end %>
+<% if Experience.all.empty? %>
+  <div class="text-center"><p>There are no started bucket lists! Be the first!</p>
+  <p><a class="btn btn-success" style="margin: 20px" href="/experiences/new" role="button">Add a New Experience to my Bucket List</a></div>
+<% else %>
+  <div class="row">
+    <a class="btn btn-success" style="margin: 20px" href="/experiences" role="button">< Back to My Bucket List</a>
+    <a class="btn btn-info" style="margin: 20px" href="/all_countries" role="button">View All By Country</a>
+    <a class="btn btn-info" style="margin: 20px" href="/all_categories" role="button">View All By Category</a>
+  </div>
 <% end %>
-<input type="button" value="View all by Country">
-<input type="button" value="View all by Category">
+<div class="row">
+  <% Experience.all.each do |e| %>
+    <% unless e.user_id == @user.id %>
+      <div class="card" style="width: 15rem; margin: 20px">
+        <div class="card-header"><a href='/experiences/<%= e.id %>'><%= e.description %></a></div>
+        <div class="card-footer"><%= e.country.name %></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
