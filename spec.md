@@ -18,7 +18,7 @@ Specs:
 - [x] ~~Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code~~ The README page can be found at https://github.com/alexisadorn/Sinatra-Adventure-Bucket-List/blob/master/README.md
 
 Confirm
-- [x] ~~You have a large number of small Git commits~~ There are currently 47 commits
+- [x] ~~You have a large number of small Git commits~~ There are currently 50 commits
 - [x] ~~Your commit messages are meaningful~~ Each commit message clearly indicates the section of the app that was modified
 - [x] ~~You made the changes in a commit that relate to the commit message~~ Commit messages indicate changes that were made
 - [x] ~~You don't include changes in a commit that aren't related to the commit message~~

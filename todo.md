@@ -25,9 +25,9 @@
 [X] Refactor code (credit/edit countries code, logged-in, current user, checking if empty)
 [X] Styling for pages
 [X] Record coding session
-[ ] Record session using the app
-[ ] Write blog
-[ ] Submit project
+[X] Record session using the app
+[X] Write blog
+[X] Submit project
 
 USER authentication
 -When a user is logged out-
